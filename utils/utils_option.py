@@ -35,3 +35,15 @@ def ordered_yaml():
 
 def get_timestamp():
     return datetime.now().strftime('_%y%m%d_%H%M%S')
+
+
+def parse(opt_path, is_train=True):
+    # ----------------------------------------
+    # initialize opt
+    # ----------------------------------------
+    with open(opt_path, mode='r') as f:
+        opt = yaml.load(f, Loader=ordered_yaml()[0])
+
+    opt["is_train"] = is_train
+
+    return opt

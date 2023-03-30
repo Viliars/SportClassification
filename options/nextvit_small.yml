@@ -1,12 +1,14 @@
 # general settings
 task: SportClassification
 gpu_ids: [0]
+seed: 42
 
 datasets:
   train: 
     name: train_dataset
     type: sport
-    dataroot: /home/viliar/data/DatasetHappy/train_B
+    csv_path: /home/viliar/Documents/VKMADE/contest/data/train_part.csv
+    dataroot: /home/viliar/Documents/VKMADE/contest/data/train
 
     size: 224
 
@@ -16,9 +18,16 @@ datasets:
     dataloader_num_workers: 8
 
   val:
-    name: test_dataset
+    name: val_dataset
     type: sport
-    dataroot: /home/viliar/Documents/git/MobileImg2Img/TestHappy/train_B
+    csv_path: /home/viliar/Documents/VKMADE/contest/data/val_part.csv
+    dataroot: /home/viliar/Documents/VKMADE/contest/data/train
+
+    size: 224
+
+    dataloader_shuffle: false
+    dataloader_batch_size: 256
+    dataloader_num_workers: 8
 
 net:
   net_type: nextvit
@@ -26,9 +35,16 @@ net:
   depths: [3, 4, 10, 3]
   path_dropout: 0.1
   size: 224
+  num_classes: 30
 
 train:
   loss: cross_entropy
+  weight: [0.81401148, 1.54015614, 1.0865182 , 1.32669591, 0.60041022,
+       0.86276859, 0.8397742 , 1.06434436, 0.70345736, 1.08573821,
+       1.16520288, 1.06885748, 1.00227524, 0.70313033, 0.96456207,
+       1.8648993 , 1.44453996, 0.76890358, 0.75963502, 1.28063788,
+       1.19654536, 0.77283257, 1.13290886, 1.0650939 , 1.17882567,
+       1.36255255, 0.8717195 , 1.24377741, 0.81488865, 1.77933333]
 
   E_decay: 0.999
 
