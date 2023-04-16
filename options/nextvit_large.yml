@@ -43,8 +43,8 @@ datasets:
 net:
   net_type: nextvit
   stem_chs: [64, 32, 64]
-  depths: [3, 4, 10, 3]
-  path_dropout: 0.1
+  depths: [3, 4, 30, 3]
+  path_dropout: 0.2
   size: 224
   num_classes: 30
 
@@ -58,16 +58,16 @@ train:
        1.36255255, 0.8717195 , 1.24377741, 0.81488865, 1.77933333]
 
   weight_decay: !!float 1e-8
-  lr: !!float 5e-6
+  lr: !!float 5e-5
 
   scheduler_type: MultiStepLR
-  scheduler_milestones: [20000, 30000, 40000, 50000, 60000]
+  scheduler_milestones: [50, 100, 150, 200, 250]
   scheduler_gamma: 0.5
   optimizer_reuse: true
 
   param_strict: true
 
   checkpoint_test: 1
-  checkpoint_save: 5
+  checkpoint_save: 50
 
-  exp_dir: image_net_augs
+  exp_dir: large_image_net_augs

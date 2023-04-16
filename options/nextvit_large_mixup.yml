@@ -7,13 +7,13 @@ datasets:
   train: 
     name: train_dataset
     type: sport
-    csv_path: /home/viliar/Documents/VKMADE/contest/data/train_part.csv
+    csv_path: /home/viliar/Documents/VKMADE/contest/data/val_part_clean_1.csv
     dataroot: /home/viliar/Documents/VKMADE/contest/data/train
 
     size: 224
 
     dataloader_shuffle: true
-    dataloader_batch_size: 128
+    dataloader_batch_size: 176
     dataloader_num_workers: 8
 
     # from SwinTransformer ImageNet config
@@ -25,16 +25,24 @@ datasets:
       remode: pixel
       recount: 1
 
+    mixup:
+      mixup_alpha: 0.8
+      cutmix_alpha: 1.0
+      prob: 1.0
+      switch_prob: 0.5
+      mode: batch
+      num_classes: 30
+
   val:
     name: val_dataset
     type: sport
-    csv_path: /home/viliar/Documents/VKMADE/contest/data/val_part.csv
+    csv_path: /home/viliar/Documents/VKMADE/contest/data/val_part_clean_1.csv
     dataroot: /home/viliar/Documents/VKMADE/contest/data/train
 
     size: 224
 
     dataloader_shuffle: false
-    dataloader_batch_size: 128
+    dataloader_batch_size: 192
     dataloader_num_workers: 8
 
     augs:
@@ -43,8 +51,8 @@ datasets:
 net:
   net_type: nextvit
   stem_chs: [64, 32, 64]
-  depths: [3, 4, 10, 3]
-  path_dropout: 0.1
+  depths: [3, 4, 30, 3]
+  path_dropout: 0.2
   size: 224
   num_classes: 30
 
@@ -61,13 +69,13 @@ train:
   lr: !!float 5e-6
 
   scheduler_type: MultiStepLR
-  scheduler_milestones: [20000, 30000, 40000, 50000, 60000]
+  scheduler_milestones: [10, 20, 30, 50, 80, 120]
   scheduler_gamma: 0.5
   optimizer_reuse: true
 
   param_strict: true
 
   checkpoint_test: 1
-  checkpoint_save: 5
+  checkpoint_save: 30
 
-  exp_dir: image_net_augs
+  exp_dir: large_image_net_augs_mixup_clean_all
