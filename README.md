@@ -4,6 +4,11 @@
 ### Модель NextViT
 Архитектура взята из [оригинального репозитория](https://github.com/bytedance/Next-ViT)
 
+### Augmentations
+Параметры аугментаций основаны на [конфигах imagenet для SwinTransformer](https://github.com/microsoft/Swin-Transformer/blob/f92123a0035930d89cf53fcb8257199481c4428d/config.py#L197)
+
+
+
 
 |         Comment         |    best F1 on val   |
 |-------------------------|:-------------------:|
